@@ -1,0 +1,26 @@
+{
+ "id": "de-KRqXffNA",
+ "dur": 45.1,
+ "cuts": 15,
+ "cuts_first20": 7,
+ "median_shot": 1.65,
+ "mean_shot": 2.82,
+ "cut_times": [
+  8.88,
+  10.17,
+  11.17,
+  12.08,
+  13.92,
+  15.21,
+  16.42,
+  20.17,
+  21.88,
+  22.46,
+  22.5,
+  24.08,
+  26.38,
+  28.96,
+  34.04
+ ],
+ "audio_err": "Error opening 'C:\\\\Users\\\\Siddharth D\\\\tides-work\\\\refs\\\\de-KRqXffNA.mp4': Forma"
+}

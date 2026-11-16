@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Cormorant Garamond"; font-style: italic; font-weight: 400;
+        src: url("assets/fonts/cormorant-400-italic.woff2") format("woff2"); }
+      @font-face { font-family: "Cormorant Garamond"; font-style: italic; font-weight: 500;
+        src: url("assets/fonts/cormorant-500-italic.woff2") format("woff2"); }
+      @font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 500;
+        src: url("assets/fonts/cormorant-500-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 600;
+        src: url("assets/fonts/cormorant-600-normal.woff2") format("woff2"); }
+      :root {
+        --ink: #f4f1ea;
+        --teal: #7fd6d2;
+        --shadow: 0 2px 18px rgba(0, 20, 30, 0.45);
+        --serif: "Cormorant Garamond", serif;
+        --caps: "Montserrat", sans-serif;
+        --ui: "Inter", sans-serif;
+        --mono: "JetBrains Mono", monospace;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: transparent; }
+      .scene { position: absolute; inset: 0; overflow: hidden; background: #000; }
+      .footage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; object-fit: cover; }
+      .bar { position: absolute; left: 0; width: 1920px; height: 139px; background: #000; z-index: 40; }
+      #bar-top { top: 0; }
+      #bar-bot { bottom: 0; }
+      .ov { position: absolute; inset: 0; z-index: 50; pointer-events: none; color: var(--ink); text-shadow: var(--shadow); }
+      .center { position: absolute; left: 0; width: 1920px; text-align: center; }
+      .hair { position: absolute; height: 1px; background: rgba(244, 241, 234, 0.7); }
+      .ln { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 52px; letter-spacing: 0.02em; }
+      .ch { display: inline-block; }
+      /* TIDES title, rising out of the horizon line */
+      #tt-mask { position: absolute; left: 0; top: 300px; width: 1920px; height: 240px; overflow: hidden; }
+      .tt { position: absolute; left: 0; width: 1920px; text-align: center; font-family: var(--serif); font-weight: 500;
+            font-size: 190px; line-height: 240px; letter-spacing: 0.38em; padding-left: 0.38em; }
+      #tt-word { top: 0; }
+      #tt-refl { top: 540px; height: 240px; opacity: 0; filter: blur(2px); transform-origin: 50% 0;
+                 -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 70%); }
+      #ts { top: 580px; font-family: var(--ui); font-weight: 400; font-size: 22px; letter-spacing: 0.32em; padding-left: 0.32em;
+            text-transform: uppercase; color: rgba(244, 241, 234, 0.78); }
+      /* captions */
+      .cap { position: absolute; left: 0; top: 470px; width: 1920px; text-align: center; }
+      .cap-main { font-family: var(--caps); font-weight: 600; font-size: 36px; letter-spacing: 0.18em; padding-left: 0.18em; text-transform: uppercase; }
+      .cap-line { width: 160px; height: 1px; margin: 22px auto 18px; background: rgba(244, 241, 234, 0.75); }
+      .cap-sub { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 34px; letter-spacing: 0.02em; }
+      /* ending */
+      #t1 { top: 470px; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 76px; letter-spacing: 0.01em; }
+      .w { display: inline-block; }
+      #t2 { top: 590px; font-family: var(--ui); font-size: 24px; letter-spacing: 0.30em; padding-left: 0.30em; text-transform: uppercase; color: rgba(244,241,234,0.8); }
+      #lk { position: absolute; left: 0; top: 400px; width: 1920px; height: 260px; }
+      #lk-word { top: 0; font-family: var(--serif); font-weight: 500; font-size: 118px; letter-spacing: 0.30em; padding-left: 0.30em; }
+      #lk-net { top: 160px; font-family: var(--ui); font-size: 20px; letter-spacing: 0.32em; padding-left: 0.32em; text-transform: uppercase; color: rgba(244,241,234,0.72); }
+      #shade { position: absolute; inset: 0; z-index: 45;
+               background: radial-gradient(ellipse 60% 55% at 50% 48%, rgba(4,22,30,0.5), rgba(4,22,30,0.25) 70%, rgba(4,22,30,0.1)); opacity: 0; }
+      .lab { font-family: var(--ui); font-weight: 600; font-size: 18px; letter-spacing: 0.34em; padding-left: 0.34em; color: rgba(244,241,234,0.65); }
+      .addr { font-family: var(--mono); font-weight: 500; font-size: 46px; }
+      .port { font-family: var(--ui); font-size: 22px; color: rgba(244,241,234,0.6); margin: 0 10px 0 28px; }
+      #steve { top: 752px; font-family: var(--mono); font-size: 34px; }
+      #dot { display: inline-block; }
+      #note { top: 810px; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 34px; color: rgba(244,241,234,0.85); }
+      #drop { position: absolute; left: 0; top: 0; width: 14px; height: 19px; background: #fff;
+              border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%; box-shadow: 0 0 6px 2px rgba(127,214,210,0.8); opacity: 0; }
+      .ring { position: absolute; left: 0; top: 0; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%;
+              border: 1.5px solid rgba(127,214,210,0.9); opacity: 0; }
+      #credit { bottom: 22px; top: auto; font-family: var(--ui); font-size: 16px; color: rgba(255,255,255,0.5); text-shadow: none; }
+      #black { position: absolute; inset: 0; background: #000; z-index: 60; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="79.0" data-width="1920" data-height="1080">
+      <div id="shade" class="clip" data-start="65.5" data-duration="13.5" data-track-index="1"></div>
+      <div id="bar-top" class="bar"></div>
+      <div id="bar-bot" class="bar"></div>
+
+      <div id="o-open" class="ov clip" data-start="0.4" data-duration="15.4" data-track-index="2">
+        <div id="l1" class="center ln" style="top:620px;"><span class="ch l1c">T</span><span class="ch l1c">h</span><span class="ch l1c">e</span><span class="ch l1c">&nbsp;</span><span class="ch l1c">w</span><span class="ch l1c">o</span><span class="ch l1c">r</span><span class="ch l1c">l</span><span class="ch l1c">d</span><span class="ch l1c">&nbsp;</span><span class="ch l1c">i</span><span class="ch l1c">s</span><span class="ch l1c">&nbsp;</span><span class="ch l1c">s</span><span class="ch l1c">h</span><span class="ch l1c">a</span><span class="ch l1c">p</span><span class="ch l1c">e</span><span class="ch l1c">d</span><span class="ch l1c">…</span></div>
+        <div id="l2" class="center ln" style="top:600px;"><span class="ch l2c">…</span><span class="ch l2c">b</span><span class="ch l2c">y</span><span class="ch l2c">&nbsp;</span><span class="ch l2c">t</span><span class="ch l2c">h</span><span class="ch l2c">e</span><span class="ch l2c">&nbsp;</span><span class="ch l2c">p</span><span class="ch l2c">l</span><span class="ch l2c">a</span><span class="ch l2c">y</span><span class="ch l2c">e</span><span class="ch l2c">r</span><span class="ch l2c">s</span><span class="ch l2c">&nbsp;</span><span class="ch l2c">w</span><span class="ch l2c">h</span><span class="ch l2c">o</span><span class="ch l2c">&nbsp;</span><span class="ch l2c">s</span><span class="ch l2c">a</span><span class="ch l2c">i</span><span class="ch l2c">l</span><span class="ch l2c">&nbsp;</span><span class="ch l2c">i</span><span class="ch l2c">n</span><span class="ch l2c">t</span><span class="ch l2c">o</span><span class="ch l2c">&nbsp;</span><span class="ch l2c">i</span><span class="ch l2c">t</span><span class="ch l2c">.</span></div>
+        <div id="hz" class="hair" style="left:360px; top:540px; width:1200px;"></div>
+        <div id="tt-mask"><div id="tt-word" class="tt">TIDES</div></div>
+        <div id="tt-refl" class="tt">TIDES</div>
+        <div id="ts" class="center">A water-world survival server</div>
+      </div>
+      <div id="o-c1" class="ov clip" data-start="26.86" data-duration="5.74" data-track-index="2">
+        <div id="c1" class="cap"><div id="c1-main" class="cap-main">Survive the open sea</div><div id="c1-line" class="cap-line"></div><div id="c1-sub" class="cap-sub">every island is earned</div></div>
+      </div>
+      <div id="o-c2" class="ov clip" data-start="46.10" data-duration="4.30" data-track-index="2">
+        <div id="c2" class="cap"><div id="c2-main" class="cap-main">Build on the waves</div><div id="c2-line" class="cap-line"></div><div id="c2-sub" class="cap-sub">a home the tide can't take</div></div>
+      </div>
+      <div id="o-c3" class="ov clip" data-start="52.10" data-duration="4.10" data-track-index="2">
+        <div id="c3" class="cap"><div id="c3-main" class="cap-main">Java + Bedrock</div><div id="c3-line" class="cap-line"></div><div id="c3-sub" class="cap-sub">one ocean, any device</div></div>
+      </div>
+      <div id="o-end" class="ov clip" data-start="56.6" data-duration="22.0" data-track-index="2">
+        <div id="t1" class="center"><span class="w">Who</span> <span class="w">you</span> <span class="w">bring</span> <span class="w">matters.</span></div>
+        <div id="t2" class="center">Invite friends · earn rewards</div>
+        <div id="lk"><div id="lk-word" class="center">TIDES SMP</div><div id="lk-net" class="center">a NightClub Network server</div></div>
+        <div id="ihair" class="hair" style="left:510px; top:418px; width:900px; background: rgba(244,241,234,0.6);"></div>
+        <div id="jl" class="center lab" style="top:462px;">JAVA</div>
+        <div id="ja" class="center addr" style="top:492px;">pm-twirl.gl.joinmc.link</div>
+        <div id="bl" class="center lab" style="top:598px;">BEDROCK</div>
+        <div id="ba" class="center addr" style="top:628px;">listed-completing.gl.at.ply.gg<span class="port">port</span>35634</div>
+        <div id="steve" class="center"><span id="dot">.</span>Steve</div>
+        <div id="note" class="center">Bedrock players: your name begins with a drop.</div>
+        <div id="drop"></div>
+        <div id="r1" class="ring"></div>
+        <div id="r2" class="ring"></div>
+        <div id="credit" class="center">Music: "Chill Wave" by Kevin MacLeod (incompetech.com) · Licensed under CC BY 4.0</div>
+      </div>
+      <div id="black" class="clip" data-start="0" data-duration="79.0" data-track-index="3"></div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+
+      // fade from black, dip to black
+      tl.fromTo("#black", { opacity: 1 }, { opacity: 0, duration: 1.2, ease: "sine.out" }, 0);
+      tl.to("#black", { opacity: 1, duration: 1.65, ease: "sine.in" }, 77.0);
+      // letterbox opens for the info
+      tl.fromTo("#bar-top", { y: 0 }, { y: -139, duration: 1.5, ease: "power2.inOut" }, 63.6);
+      tl.fromTo("#bar-bot", { y: 0 }, { y: 139, duration: 1.5, ease: "power2.inOut" }, 63.6);
+      tl.fromTo("#shade", { opacity: 0 }, { opacity: 1, duration: 1.5 }, 65.5);
+
+      var IN = { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: "power2.out" };
+      function enter(sel, t, extra) { tl.fromTo(sel, Object.assign({ opacity: 0, y: 14, filter: "blur(6px)" }, extra || {}), IN, t); }
+      function leave(sel, t) { tl.to(sel, { opacity: 0, y: -8, duration: 0.7, ease: "power2.in" }, t); }
+
+      // L1 / L2: letter by letter
+      tl.fromTo(".l1c", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.6, stagger: 0.035, ease: "sine.out" }, 0.6);
+      leave("#l1", 3.1);
+      tl.fromTo(".l2c", { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.035, ease: "sine.out" }, 3.9);
+      leave("#l2", 7.1);
+      // the horizon hairline, then TIDES rises out of it
+      tl.fromTo("#hz", { scaleX: 0 }, { scaleX: 1, duration: 1.6, ease: "power3.inOut" }, 4.6);
+      tl.fromTo("#tt-word", { y: 250, filter: "blur(8px)" }, { y: 0, filter: "blur(0px)", duration: 1.6, ease: "power3.out" }, 9.5);
+      tl.fromTo("#tt-refl", { opacity: 0, scaleY: 0 }, { opacity: 0.14, scaleY: -1, duration: 1.6, ease: "power3.out" }, 9.5);
+      enter("#ts", 10.1);
+      leave(["#tt-mask", "#tt-refl", "#ts", "#hz"], 15.0);
+
+      // captions: hairline first, then the two lines
+      
+tl.fromTo("#c1-line", { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power2.out" }, 26.76); enter("#c1-main", 26.86); enter("#c1-sub", 27.01); leave("#c1", 31.90);      tl.fromTo("#c2-line", { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power2.out" }, 46.00); enter("#c2-main", 46.10); enter("#c2-sub", 46.25); leave("#c2", 49.70);      tl.fromTo("#c3-line", { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power2.out" }, 52.00); enter("#c3-main", 52.10); enter("#c3-sub", 52.25); leave("#c3", 55.50);
+
+      // T1 word by word, T2, lockup
+      tl.fromTo("#t1 .w", { opacity: 0, y: 12, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 1.2, stagger: 0.18, ease: "sine.out" }, 56.9);
+      leave("#t1", 60.9);
+      enter("#t2", 61.0);
+      leave("#t2", 63.7);
+      enter("#lk", 63.5, { y: 40, filter: "blur(10px)" });
+      tl.to("#lk", { y: -185, scale: 0.62, duration: 0.8, ease: "power2.inOut" }, 66.4);
+
+      // info rows
+      tl.fromTo("#ihair", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power3.inOut" }, 66.0);
+      enter(["#jl", "#ja"], 66.3);
+      enter(["#bl", "#ba"], 66.9);
+      enter("#steve", 67.8);
+      tl.set("#dot", { opacity: 0 }, 0);
+      // the droplet becomes the leading "."
+      tl.fromTo("#drop", { x: 897, y: -20, opacity: 1 }, { x: 897, y: 760, opacity: 1, duration: 0.7, ease: "power2.in" }, 69.0);
+      tl.to("#drop", { scale: 0.3, opacity: 0, duration: 0.12 }, 69.7);
+      tl.fromTo("#dot", { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 69.7);
+      tl.fromTo("#r1", { x: 904, y: 786, scale: 0, opacity: 0.6 }, { scale: 1, opacity: 0, duration: 0.9, ease: "sine.out" }, 69.7);
+      tl.fromTo("#r2", { x: 904, y: 786, scale: 0, opacity: 0.6 }, { scale: 1, opacity: 0, duration: 0.9, ease: "sine.out" }, 69.85);
+      enter("#note", 69.1);
+      tl.fromTo("#credit", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 76.5);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

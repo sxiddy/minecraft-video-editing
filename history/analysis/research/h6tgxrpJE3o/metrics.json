@@ -1,0 +1,29 @@
+{
+ "id": "h6tgxrpJE3o",
+ "dur": 51.1,
+ "cuts": 18,
+ "cuts_first20": 8,
+ "median_shot": 3.08,
+ "mean_shot": 2.69,
+ "cut_times": [
+  3.46,
+  6.33,
+  8.79,
+  11.17,
+  12.62,
+  15.83,
+  18.96,
+  19.04,
+  22.12,
+  28.46,
+  31.58,
+  34.75,
+  37.88,
+  41.04,
+  41.08,
+  45.46,
+  47.42,
+  49.67
+ ],
+ "audio_err": "Error opening 'C:\\\\Users\\\\Siddharth D\\\\tides-work\\\\refs\\\\h6tgxrpJE3o.mp4': Forma"
+}

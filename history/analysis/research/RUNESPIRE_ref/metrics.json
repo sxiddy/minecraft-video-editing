@@ -1,0 +1,27 @@
+{
+ "id": "RUNESPIRE_ref",
+ "dur": 48.7,
+ "cuts": 16,
+ "cuts_first20": 11,
+ "median_shot": 1.65,
+ "mean_shot": 2.86,
+ "cut_times": [
+  3.9,
+  5.52,
+  7.1,
+  8.7,
+  10.75,
+  11.85,
+  13.5,
+  15.1,
+  16.7,
+  18.4,
+  19.97,
+  25.77,
+  27.47,
+  29.08,
+  32.18,
+  41.15
+ ],
+ "audio_err": "Error opening 'C:\\\\Users\\\\Siddharth D\\\\tides-work\\\\refs\\\\RUNESPIRE_ref.mp4': For"
+}

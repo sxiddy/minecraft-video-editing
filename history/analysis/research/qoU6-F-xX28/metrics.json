@@ -1,0 +1,15 @@
+{
+ "id": "qoU6-F-xX28",
+ "dur": 65.6,
+ "cuts": 4,
+ "cuts_first20": 0,
+ "median_shot": 2.47,
+ "mean_shot": 13.12,
+ "cut_times": [
+  32.1,
+  33.37,
+  35.83,
+  37.1
+ ],
+ "audio_err": "Error opening 'C:\\\\Users\\\\Siddharth D\\\\tides-work\\\\refs\\\\qoU6-F-xX28.mp4': Forma"
+}

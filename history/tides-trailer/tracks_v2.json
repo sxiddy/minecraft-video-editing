@@ -1,0 +1,37 @@
+{
+ "chill-wave": {
+  "file": "C:\\Users\\Siddharth D\\OneDrive\\Desktop\\Video Editing\\music-options\\chill-wave.mp3",
+  "t_in": 115.25,
+  "beat0": 0.576,
+  "beat": 0.60015,
+  "bpm": 100.0
+ },
+ "newer-wave": {
+  "file": "C:/Users/Siddharth D/Projects/drive-reel-mcp/music/library/newer-wave.mp3",
+  "t_in": 2.7831,
+  "beat0": 0.0,
+  "beat": 0.54546,
+  "bpm": 110.0
+ },
+ "voxel-revolution": {
+  "file": "C:/Users/Siddharth D/Projects/drive-reel-mcp/music/library/voxel-revolution.mp3",
+  "t_in": 0.0823,
+  "beat0": 0.0,
+  "beat": 0.49147,
+  "bpm": 122.1
+ },
+ "ascending-the-vale": {
+  "file": "C:\\Users\\Siddharth D\\OneDrive\\Desktop\\Video Editing\\music-options\\ascending-the-vale.mp3",
+  "t_in": 41.1101,
+  "beat0": 0.0,
+  "beat": 0.63159,
+  "bpm": 95.0
+ },
+ "neon-laser-horizon": {
+  "file": "C:/Users/Siddharth D/Projects/drive-reel-mcp/music/library/neon-laser-horizon.mp3",
+  "t_in": 36.0634,
+  "beat0": 0.0,
+  "beat": 0.3750004,
+  "bpm": 160.0
+ }
+}

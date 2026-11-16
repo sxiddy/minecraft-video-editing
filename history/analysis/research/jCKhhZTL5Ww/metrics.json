@@ -1,0 +1,24 @@
+{
+ "id": "jCKhhZTL5Ww",
+ "dur": 60.0,
+ "cuts": 13,
+ "cuts_first20": 4,
+ "median_shot": 1.96,
+ "mean_shot": 4.29,
+ "cut_times": [
+  13.25,
+  14.21,
+  16.12,
+  18.08,
+  25.79,
+  27.75,
+  29.67,
+  35.5,
+  41.29,
+  43.21,
+  48.08,
+  48.12,
+  49.04
+ ],
+ "audio_err": "Error opening 'C:\\\\Users\\\\Siddharth D\\\\tides-work\\\\refs\\\\jCKhhZTL5Ww.mp4': Forma"
+}
